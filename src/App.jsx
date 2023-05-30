@@ -1,15 +1,23 @@
-import { useState } from "react";
-import Box from "./components/Box";
-import Box1 from "./components/Box1";
+import { Routes, Route, NavLink } from "react-router-dom";
+import Home from "./pages/home";
+import About from "./pages/about";
+import Users from "./pages/Users";
+import NotFound from "./pages/Not found";
 export default function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [count, setCount] = useState(0);
   return (
     <div>
-      <h1>App Components</h1>
-      <button onClick={() => setIsOpen(!isOpen)}>Show users</button>
-      {isOpen && <Box count={count} />}
-      {isOpen && <Box1 />}
+      <div>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/users">Users</NavLink>
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/about" element={<About />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
