@@ -1,23 +1,18 @@
-import { Routes, Route, NavLink } from "react-router-dom";
-import Home from "./pages/home";
-import About from "./pages/about";
-import Users from "./pages/Users";
-import NotFound from "./pages/Not found";
+import { useDispatch, useSelector } from "react-redux";
+import { increment, decrement, reset } from "./redux/counterSlice";
+import "./App.css";
 export default function App() {
+  const dispatch = useDispatch();
+  const { value } = useSelector((store) => store.counter);
+  const handleIncrement = () => {
+    dispatch(increment());
+  };
   return (
-    <div>
-      <div>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/users">Users</NavLink>
-      </div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/about" element={<About />} />
-
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+    <div className="app">
+      <h1>Counter: {value}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
+      <button onClick={() => dispatch(reset())}>Reset</button>
     </div>
   );
 }
