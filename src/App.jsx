@@ -1,25 +1,23 @@
-import { Button } from "./components/Button/Button";
-
+import { Routes, Route, NavLink } from "react-router-dom";
+import Home from "./pages/home";
+import About from "./pages/about";
+import Users from "./pages/Users";
+import NotFound from "./pages/Not found";
 export default function App() {
   return (
-    <>
-      <h1> Grace Patricia Kelly</h1>
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Grace_Kelly_1956.jpg/248px-Grace_Kelly_1956.jpg"
-        alt="Grace  Kelly"
-        className="photo"
-      />
-      <ul>
-        <li>Princess Monaco</li>
-        <li>Hollywood Star</li>
-        <li>Fashion icon</li>
-      </ul>
+    <div>
       <div>
-        <h2>Navigation</h2>
-        <Button text="Previous card"></Button>
-        <Button text="More view"></Button>
-        <Button text="Next card"></Button>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/users">Users</NavLink>
       </div>
-    </>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/about" element={<About />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 }
